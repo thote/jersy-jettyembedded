@@ -1,0 +1,26 @@
+group 'com.tw.magixception'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'com.sun.jersey:jersey-bundle:1.12'
+    compile 'org.eclipse.jetty:jetty-server:9.3.7.RC1'
+    compile 'org.eclipse.jetty:jetty-servlet:9.3.7.RC1'
+    compile 'com.google.guava:guava:19.0'
+    compile 'asm:asm:3.3.1'
+
+
+
+    testCompile 'org.mockito:mockito-core:2.0.41-beta'
+    testCompile group: 'junit', name: 'junit', version: '4.11'
+}

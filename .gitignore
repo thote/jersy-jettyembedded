@@ -1,0 +1,15 @@
+.idea/
+*.iml
+target/*
+libs
+out
+*.log
+report/
+.DS_Store
+${project.build.directory}/
+*.ipr
+*.iws
+build
+apps
+.gradle
+*.db
