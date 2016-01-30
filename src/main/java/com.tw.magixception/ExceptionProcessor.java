@@ -18,7 +18,7 @@ public class ExceptionProcessor {
         Class<GlobalExceptionHandler> c = GlobalExceptionHandler.class;
         Method[] methods = c.getDeclaredMethods();
         for (Method m : methods) {
-            if (m.getParameterCount() == 1) {
+            if (m.isAnnotationPresent(ExceptionHandle.class) && m.getParameterCount() == 1) {
                 Class<?> fp = m.getParameterTypes()[0];
                 handlerMethods.put(fp, m);
             }

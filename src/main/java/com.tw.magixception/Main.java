@@ -16,8 +16,6 @@ import static java.util.Arrays.asList;
 public class Main {
 
     public static void main(String[] args) throws Exception {
-       // currentThread().setUncaughtExceptionHandler(ExceptionProcessor.getInstance());
-
         Server s = new Server(8183);
         ServletContextHandler sch = new ServletContextHandler(s, "/");
         sch.addServlet(getServlet(), "/*");
