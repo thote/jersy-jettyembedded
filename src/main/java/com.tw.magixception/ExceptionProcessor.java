@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 public class ExceptionProcessor {
 
-    private GlobalExceptionHandler handler = new GlobalExceptionHandler();
-    private HashMap<Class, Method> handlerMethods = new HashMap<>();
+    private final GlobalExceptionHandler handler = new GlobalExceptionHandler();
+    private final HashMap<Class, Method> handlerMethods = new HashMap<>();
 
     public ExceptionProcessor() {
         scanExceptionHandlers();
@@ -25,7 +25,8 @@ public class ExceptionProcessor {
         }
     }
 
-    public Response handleException(Throwable e) {
+
+    public Response handleException(  Throwable e) {
         Method m = handlerMethods.get(e.getClass());
         if (m == null) {
             m = handlerMethods.get(Exception.class);

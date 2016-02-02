@@ -9,7 +9,8 @@ import javax.ws.rs.ext.Provider;
 @Provider
 public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
 
-    ExceptionProcessor exceptionProcessor = new ExceptionProcessor();
+    private final ExceptionProcessor exceptionProcessor = new ExceptionProcessor();
+
 
     @Override
     public Response toResponse(Throwable e) {

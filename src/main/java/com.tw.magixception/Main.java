@@ -5,8 +5,12 @@ import com.sun.jersey.spi.container.servlet.ServletContainer;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
+import org.glassfish.jersey.server.ResourceConfig;
 
+import javax.ws.rs.ext.ContextResolver;
 import java.util.HashMap;
+import java.util.Map;
 
 import static com.sun.jersey.api.core.PackagesResourceConfig.PROPERTY_PACKAGES;
 import static com.sun.jersey.api.core.ResourceConfig.PROPERTY_CONTAINER_REQUEST_FILTERS;
@@ -26,9 +30,11 @@ public class Main {
         }
     }
 
+
     private static ServletHolder getServlet() {
-        return new ServletHolder(new ServletContainer(getPackageResourceConfig()));
+        return new ServletHolder(new ServletContainer(createApp()));
     }
+
 
     private static PackagesResourceConfig getPackageResourceConfig() {
         HashMap<String, Object> config = new HashMap<>();
@@ -38,4 +44,19 @@ public class Main {
 
         return new PackagesResourceConfig(config);
     }
+
+    public static ResourceConfig createApp() {
+        return new ResourceConfig()
+                .packages("com.tw.magixception")
+                .register(createMoxyJsonResolver());
+    }
+
+    public static ContextResolver<MoxyJsonConfig> createMoxyJsonResolver() {
+        final MoxyJsonConfig moxyJsonConfig = new MoxyJsonConfig();
+        Map<String, String> namespacePrefixMapper = new HashMap<String, String>(1);
+        namespacePrefixMapper.put("http://www.w3.org/2001/XMLSchema-instance", "xsi");
+        moxyJsonConfig.setNamespacePrefixMapper(namespacePrefixMapper).setNamespaceSeparator(':');
+        return moxyJsonConfig.resolver();
+    }
+
 }

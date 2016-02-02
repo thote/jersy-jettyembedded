@@ -14,6 +14,7 @@ public class ExceptionFilter implements ContainerRequestFilter, ContainerRespons
         return request;
     }
 
+
     @Override
     public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
         System.out.println("inside response filter : " + response.getResponse().getStatus());
