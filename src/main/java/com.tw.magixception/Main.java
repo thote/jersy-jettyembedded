@@ -32,7 +32,7 @@ public class Main {
 
 
     private static ServletHolder getServlet() {
-        return new ServletHolder(new ServletContainer(createApp()));
+        return new ServletHolder(new ServletContainer(getPackageResourceConfig()));
     }
 
 

@@ -11,7 +11,9 @@ public class GlobalExceptionMapper implements ExceptionMapper<Throwable> {
 
     private final ExceptionProcessor exceptionProcessor = new ExceptionProcessor();
 
-
+    public GlobalExceptionMapper() {
+        System.out.println("GlobalExceptionMapper");
+    }
     @Override
     public Response toResponse(Throwable e) {
         return e instanceof WebApplicationException

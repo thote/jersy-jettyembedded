@@ -17,7 +17,6 @@ public class MyResource {
         return "Got it! ";
     }
 
-
     @GET
     @Path("/killit")
     @Produces("text/plain")
@@ -25,7 +24,6 @@ public class MyResource {
         System.out.println("inside killit :"  + Thread.currentThread().getName());
         return "killing it it!";
     }
-
 
     @GET
     @Path("/null")
@@ -63,7 +61,6 @@ public class MyResource {
         throw new IndexOutOfBoundsException("Don't ask me what I don't have");
     }
 
-
     @GET
     @Path("/qp")
     @Produces("application/json")
@@ -71,8 +68,7 @@ public class MyResource {
         System.out.println(" getperson : returning : " + new Person() );
         return new Person();
     }
-
-
+    
     @POST
     @Path("/body")
     @Produces("application/json")
