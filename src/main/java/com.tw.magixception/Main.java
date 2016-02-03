@@ -24,9 +24,13 @@ public class Main {
         ServletContextHandler sch = new ServletContextHandler(s, "/");
         sch.addServlet(getServlet(), "/*");
 
-        s.start();
-        synchronized (s) {
-            s.wait();
+        try {
+            s.start();
+            synchronized (s) {
+                s.wait();
+            }
+        } catch(Exception e) {
+            System.out.println("exception thrown : " + e.getMessage());
         }
     }
 
@@ -39,8 +43,8 @@ public class Main {
     private static PackagesResourceConfig getPackageResourceConfig() {
         HashMap<String, Object> config = new HashMap<>();
         config.put(PROPERTY_PACKAGES, "com.tw.magixception");
-        config.put(PROPERTY_CONTAINER_REQUEST_FILTERS, asList(ExceptionFilter.class));
-        config.put(PROPERTY_CONTAINER_RESPONSE_FILTERS, asList(ExceptionFilter.class));
+        config.put(PROPERTY_CONTAINER_REQUEST_FILTERS, asList(UrlDecodeFilter.class));
+        config.put(PROPERTY_CONTAINER_RESPONSE_FILTERS, asList(UrlDecodeFilter.class));
 
         return new PackagesResourceConfig(config);
     }

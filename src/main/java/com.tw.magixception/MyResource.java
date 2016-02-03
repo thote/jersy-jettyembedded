@@ -72,13 +72,23 @@ public class MyResource {
        return person;
     }
 
-//
+    @POST
+    @Path("/encodedbody")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Person encodedPerson(Person person) {
+        System.out.println(" person : " + person);
+        return person;
+    }
+
+
 //    @GET
-//    @Path("/pp/{path}")
+//    @Path("/pp/{path}/pp")
 //    @Produces("application/json")
-//    public Person pathParam(@PathParam("person") Person person) {
+//    @Consumes("application/json")
+//    public Person pathParam(@PathParam("path") Person person) {
 //        System.out.println(" getPerson : returning : " + person );
-//        return person;
+//        return new Person();
 //    }
 
 
