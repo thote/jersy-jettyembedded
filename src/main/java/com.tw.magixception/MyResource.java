@@ -56,25 +56,36 @@ public class MyResource {
     }
 
     @GET
+    @Path("/qp")
+    @Produces("application/json")
+    public Person gerPerson() {
+        System.out.println(" getperson : returning : " + new Person() );
+        return new Person();
+    }
+
+    @POST
+    @Path("/body")
+    @Produces("application/json")
+    @Consumes("application/json")
+    public Person postPerson(Person person) {
+        System.out.println(" person : " + person);
+       return person;
+    }
+
+//
+//    @GET
+//    @Path("/pp/{path}")
+//    @Produces("application/json")
+//    public Person pathParam(@PathParam("person") Person person) {
+//        System.out.println(" getPerson : returning : " + person );
+//        return person;
+//    }
+
+
+    @GET
     @Path("/async")
     public void async(@Suspended AsyncResponse response) {
         throw new IndexOutOfBoundsException("Don't ask me what I don't have");
     }
 
-    @GET
-    @Path("/qp")
-    @Produces("application/json")
-    public Person queryParam() {
-        System.out.println(" getperson : returning : " + new Person() );
-        return new Person();
-    }
-    
-    @POST
-    @Path("/body")
-    @Produces("application/json")
-    @Consumes("application/json")
-    public Person body(Person person) {
-        System.out.println(" person : " + person);
-       return person;
-    }
 }
