@@ -1,5 +1,7 @@
 package com.tw.magixception;
 
+import com.sun.jersey.api.core.InjectParam;
+
 import javax.ws.rs.*;
 import javax.ws.rs.container.AsyncResponse;
 import javax.ws.rs.container.Suspended;
@@ -58,9 +60,25 @@ public class MyResource {
     @GET
     @Path("/qp")
     @Produces("application/json")
-    public Person gerPerson() {
-        System.out.println(" getperson : returning : " + new Person() );
-        return new Person();
+    public Person gerPerson(@InjectParam PersonQuery query) {
+        System.out.println("getPerson : " + query);
+        Person p = new Person();
+        p.setFirstName(query.getFirstName());
+        p.setLastName(query.getLastName());
+        System.out.println(" returning person : returning : " + p );
+        return p;
+    }
+
+    @GET
+    @Path("/qp1")
+    @Produces("application/json")
+    public Person gerPerson1(@QueryParam("firstName") String firstName, @QueryParam("lastName") String lastName) {
+        System.out.println("getPerson1 : " + firstName + lastName);
+        Person p = new Person();
+        p.setFirstName("MySeflf");
+        p.setLastName("SomeoneElse");
+        System.out.println(" returning person : returning : " + p );
+        return p;
     }
 
     @POST

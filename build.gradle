@@ -12,6 +12,11 @@ repositories {
     mavenCentral()
 }
 
+jettyRun {
+    scanIntervalSeconds = 1
+    reload = "automatic"
+}
+
 dependencies {
     compile 'com.sun.jersey:jersey-bundle:1.12'
     compile 'org.eclipse.jetty:jetty-server:9.3.7.RC1'
