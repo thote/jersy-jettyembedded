@@ -15,6 +15,11 @@ public class MyResource {
     @Path("/getit")
     @Produces("text/plain")
     public String getIt() {
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         System.out.println("inside getit"  + Thread.currentThread().getName());
         return "Got it! ";
     }
@@ -113,7 +118,17 @@ public class MyResource {
     @GET
     @Path("/async")
     public void async(@Suspended AsyncResponse response) {
-        throw new IndexOutOfBoundsException("Don't ask me what I don't have");
+        System.out.println("hanlding async");
+        response.resume("This is async method ");
+//
+////        new Thread(() -> {
+////            try {
+////                wait(10000);
+////            } catch (InterruptedException e) {
+////                e.printStackTrace();
+////            }
+////            response.resume("This is the waited response");
+////        }).start();
     }
 
 }

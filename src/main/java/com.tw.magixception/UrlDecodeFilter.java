@@ -10,8 +10,12 @@ import java.io.*;
 import java.net.URLDecoder;
 
 public class UrlDecodeFilter implements ContainerRequestFilter, ContainerResponseFilter {
+
+    private long startTime;
+
     @Override
     public ContainerRequest filter(ContainerRequest request) {
+        startTime = System.currentTimeMillis();
         System.out.println("inside request Filter : " + request.getPath());
         String encodedString = readUrlEncodedString(request);
         System.out.println("encoded stirng : " + encodedString);
@@ -41,6 +45,10 @@ public class UrlDecodeFilter implements ContainerRequestFilter, ContainerRespons
     @Override
     public ContainerResponse filter(ContainerRequest request, ContainerResponse response) {
         System.out.println("inside response filter : " + response.getResponse().getStatus());
+        System.out.println("method: " + request.getMethod()
+            + " path : " + request.getPath()
+            + " time: " + (int) ((System.currentTimeMillis() - startTime))
+            + " returnCode: " + response.getResponse().getStatus());
         return response;
     }
 }
